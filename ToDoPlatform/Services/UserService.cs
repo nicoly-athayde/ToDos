@@ -14,7 +14,7 @@ public class UserService : IUserService
 
     public UserService(
         SignInManager<AppUser> signInManager,
-        UserManager<AppUser> userManager ,
+        UserManager<AppUser> userManager,
         ILogger<UserService> logger
     )
     {
@@ -25,7 +25,7 @@ public class UserService : IUserService
 
     public async Task<SignInResult> Login(LoginVM login)
     {
-        string Username = login.Email;
+        string userName = login.Email;
         if (Helper.IsValidEmail(login.Email))
         {
             var user = await _userManager.FindByEmailAsync(login.Email);
@@ -34,16 +34,20 @@ public class UserService : IUserService
         }
 
         var result = await _signInManager.PasswordSignInAsync(
-        userName, login.Password, login.RememberMe, lockoutOnFailure: true
+            userName, login.Password, login.RememberMe, lockoutOnFailure: true
         );
 
-        IFileHttpResult (result.Secceeded)
-        _
+        if (result.Succeeded)
+            _logger.LogInformation("");
+        if (result.IsLockedOut)
+            _logger.LogWarning("");
+
+        return result;
     }
 
     public async Task Logout()
     {
-       _logger.LogInformation($"Usuário '{ClaimTypes.Email}'saiu do sistema");
-       await _signInManager.SignOutAsync();
+        _logger.LogInformation($"Usuário '{ClaimTypes.Email}' saiu do sistema");
+        await _signInManager.SignOutAsync();
     }
 }
