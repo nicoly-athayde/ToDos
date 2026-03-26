@@ -1,3 +1,4 @@
+@using ToDoPlatform.ViewModels
 @model LoginVM
 @{
     Layout = null;
@@ -52,8 +53,8 @@ senha?</a>
  document.getElementById('ReturnUrl').value);
  }
  if ('@TempData["Failure"]' !== "") {
- showMessage("warning", '@TempData["Failure"]', 5000, null);
+     showMessage("warning", '@TempData["Failure"]',5000,null );
  }
- </script>
+    </script>
 </body>
 </html>
