@@ -1,28 +1,27 @@
-﻿{{!-- Views/Shared/_Layout.cshtml --}} 
-<!DOCTYPE html> 
-<html lang="pt-BR"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initialscale=1.0"> 
-    <title>ToDos Platform - @ViewData["Title"]</title> 
-    <link rel="stylesheet" href="~/css/site.css"> 
-    @await RenderSectionAsync("Styles", required: false) 
-</head> 
-<body> 
-    <nav class="navbar"> 
-        <div class="nav-container"> 
-            <div class="logo">ToDos Platform</div> 
-            <partial name="_LoginPartial" /> 
-        </div> 
-    </nav> 
+﻿{{!-- Views/Shared/_Layout.cshtml --}}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initialscale=1.0">
+    <title>ToDos Platform - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css">
+    @await RenderSectionAsync("Styles", required: false)
+</head>
 
-    <main class="main-container"> 
-        @RenderBody() 
-    </main> 
- 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script> 
-    <script src="~/js/site.js" asp-append-version="true"></script> 
-    @await RenderSectionAsync("Scripts", required: false) 
-</body> 
-</html> 
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">ToDos Platform</div>
+            <partial name="_LoginPartial" />
+        </div>
+    </nav>
 
+    <main class="main-container">
+        @RenderBody()
+    </main>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

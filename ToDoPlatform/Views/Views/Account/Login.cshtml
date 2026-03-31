@@ -34,27 +34,26 @@
                             <input type="checkbox" asp-for="RememberMe">
                             <label class="form-label" aspfor="RememberMe"></label>
                             </label>
- <a href="#" class="forgot-password">Esqueceu a
-senha?</a>
- </div>
- <button type="submit" class="btn-login">Entrar</button>
- <div class="register-link">
- Não tem uma conta? <a href="#">Cadastre-se</a>
- </div>
- </form>
- </div>
- </div>
- <script src="~/lib/jquery/dist/jquery.min.js"></script>
- <partial name="_ValidationScriptsPartial" />
- <partial name="_Notification">
- <script>
- if ('@TempData["Success"]' !== "") {
- showMessage(null, '@TempData["Success"]', 3000,
- document.getElementById('ReturnUrl').value);
- }
- if ('@TempData["Failure"]' !== "") {
-     showMessage("warning", '@TempData["Failure"]',5000,null );
- }
-    </script>
-</body>
+                            <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                    </div>
+
+                            <button type="submit" class="btn-login">Entrar</button>
+                            <div class="register-link"> Não tem uma conta? <a href="#">Cadastre-se</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <partial name="_ValidationScriptsPartial" />
+        <partial name="_Notification">
+        <script>
+            if ('@TempData["Success"]' !== "") {
+                showMessage(null, '@TempData["Success"]', 3000,
+                    document.getElementById('ReturnUrl').value);
+            }
+            if ('@TempData["Failure"]' !== "") {
+                showMessage("warning", '@TempData["Failure"]',5000,null );
+            }
+        </script>
+    </body>
 </html>
