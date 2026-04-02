@@ -8,5 +8,7 @@ public interface IUserService
 {
     Task<UserVM> GetLoggedUser();
     Task<SignInResult> Login(LoginVM login);
-    Task Logout ();
- }
+    Task Logout();
+    Task<List<string>> Register(RegisterVM register);
+}
+

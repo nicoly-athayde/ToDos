@@ -71,4 +71,32 @@ lockoutOnFailure: true);
         _logger.LogInformation($"Usuário saiu do sistema");
         await _signInManager.SignOutAsync();
     }
+    public async Task<List<string>> Register(RegisterVM register)
+    {
+        var user = new AppUser()
+        {
+            Name = register.Name,
+            UserName = register.Email,
+            NormalizedUserName = register.Email.Normalize(),
+            Email = register.Email,
+            NormalizedEmail = register.Email.Normalize(),
+            EmailConfirmed = true,
+            LockoutEnabled = true,
+        };
+        var addUser = await _userManager.CreateAsync(user,
+register.Password);
+        List<string> result = [];
+        if (addUser.Succeeded)
+        {
+            _logger.LogInformation($"Novo usuário registrado: {register.Email}");
+            await _userManager.AddToRoleAsync(user, "Usuário");
+        }
+        else
+        {
+            foreach (var error in addUser.Errors)
+
+result.Add(TranslateIdentityErrors.TranslateErrorMessage(error.Code));
+        }
+        return result;
+    }
 }

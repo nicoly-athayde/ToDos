@@ -106,3 +106,7 @@
         grid-template-columns: 1fr;
     }
 }
+
+.swal2-title {
+  white-space: pre-wrap; /* This makes the browser respect newline characters (\n) */
+}

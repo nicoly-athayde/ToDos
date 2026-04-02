@@ -72,3 +72,82 @@ id).SingleOrDefaultAsync();
             return Json(new
             {
                 success = false,
+                message = "Sua sessão expirou, faça login para continuar!",
+                redirect = true
+            });
+        }
+        if (todo.UserId != user.Id)
+        {
+            return Json(new
+            {
+                success = false,
+                message = "Você não tem permissão para alterar esta tarefa!"
+            });
+        }
+        try
+        {
+            todo.Done = true;
+            _dbContext.ToDos.Update(todo);
+            _dbContext.SaveChanges();
+
+            return Json(new
+            {
+                success = true,
+                message = "Tarefa finalizada com sucesso! Recarregando Lista..."
+            });
+        }
+        catch (Exception ex)
+        {
+            return Json(new
+            {
+                success = false,
+                message = "Ocorreu um problema ao finalizar a tarefa! Tente novamente mais tarde...",
+                details = ex.Message
+            });
+        }
+    }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None,
+NoStore = true)]
+
+public IActionResult AddTask()
+{
+ return View();
+}
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> AddTask(AddTaskVM addTask)
+{
+    if (ModelState.IsValid)
+    {
+        var user = await _userService.GetLoggedUser();
+        if (user == null)
+        {
+            TempData["Failure"] = "Sua sessão expirou, faça login novamente!";
+        }
+        else
+        {
+            ToDo toDo = new()
+            {
+                Title = addTask.Title,
+                Description = addTask.Description,
+                UserId = user.Id
+            };
+            await _dbContext.ToDos.AddAsync(toDo);
+            await _dbContext.SaveChangesAsync();
+            TempData["Success"] = "Tarefa criada com sucesso! Redirecionando...";
+        }
+    }
+    return View(addTask);
+}
+
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel {
+            RequestId = Activity.Current?.Id ??
+HttpContext.TraceIdentifier
+        });
+    }
+}
+
+    
+    
