@@ -5,6 +5,7 @@ using ToDoPlatform.ViewModels;
 using System.Security.Claims;
 using ToDoPlatform.Data;
 using Microsoft.EntityFrameworkCore;
+using ToDoPlatform.Helpers;
 
 namespace ToDoPlatform.Services;
 public class UserService : IUserService
@@ -93,8 +94,7 @@ register.Password);
         }
         else
         {
-            foreach (var error in addUser.Errors)
-
+            foreach (var error in addUser.Errors) 
 result.Add(TranslateIdentityErrors.TranslateErrorMessage(error.Code));
         }
         return result;
