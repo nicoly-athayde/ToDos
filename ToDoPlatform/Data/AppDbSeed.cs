@@ -9,7 +9,7 @@ public class AppDbSeed
     public AppDbSeed(ModelBuilder builder)
     {
         #region Popular Perfis de usuários
-        List<IdentityRole> roles = new ()
+        List<IdentityRole> roles = new()
         {
             new()
             {
@@ -24,7 +24,7 @@ public class AppDbSeed
                 NormalizedName = "ADMINISTRADOR"
             },
         };
-       builder.Entity<IdentityRole>().HasData(roles);
+        builder.Entity<IdentityRole>().HasData(roles);
         #endregion
 
         #region Popular dados de Usuário
@@ -107,6 +107,6 @@ public class AppDbSeed
         };
         builder.Entity<ToDo>().HasData(toDos);
         #endregion
-    } 
+    }
 }
 
